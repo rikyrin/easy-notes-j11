@@ -3,6 +3,7 @@ package com.example.easynotesj11.controller;
 import com.example.easynotesj11.model.Note;
 import com.example.easynotesj11.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,9 @@ public class NoteController {
     private NoteService noteService;
 
     @PostMapping
-    public void addNote(@RequestBody Note note){
+    public ResponseEntity<String> addNote(@RequestBody Note note){
         noteService.addNote(note);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Nota creada con exito");
     }
     @GetMapping
     public List<Note> getAllNotes() {
